@@ -4,7 +4,7 @@ This repository contains information about an analysis of the Gen2 Addressable R
 
 ## Repository Contents
 
-[./docs](./docs/) -Documentation for the Gen2 Addressable RGB protocol [click here to view online](./docs/Gen2-Addressable-RGB.md) 
+[./docs](./docs/) -Documentation for the Gen2 Addressable RGB protocol [click here to view online](./docs/Gen2_ARGB_protocol_analysis.md) 
 
 [./images](./images/) - Images used in the documentation
 
