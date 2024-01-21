@@ -46,15 +46,21 @@ In case you looked at the links above and were confused about how ARGB2 Gen2 is 
 
 Since I was not able to locate any discrete Gen2 ARGB  LEDs, let alone find data-sheets. I purchased a LED controller ([Coolermaster A1](https://www.coolermaster.com/catalog/coolers/rgb-accessories/led-controller-a1/)) and a fan with Gen2 ARGB LEDs ([Artic P12 PWM PST-ARGB](https://www.arctic.de/en/P12-PWM-PST-A-RGB/ACFAN00231A)). 
 
-![Devices](../_images/ARGB2_devices.jpg)
+<p align="center">
+	<img src="../_images/ARGB2_devices.jpg" alt="Devices" width="70%"/>
+</p>
 
 The LED controller is a USB device that can be connected to a PC and controlled via software. Up to three Gen2 ARGB  LED strings can be connected to it. The controller contains a single custom IC, most likely a micro-controller.
 
-![LED controller inside](../_images/ARGB2_controller_open.jpg)
+<p align="center">
+	<img src="../_images/ARGB2_controller_open.jpg" alt="LED controller inside" width="60%"/>
+</p>
 
 The fan contains a small PCB with 12 LEDS in 3528 form factor. These LEDs appear virtually identical to other addressable RGB LEDs on the market. I believe the controller IC in the LEDs is the AP6112Y from Anapex.
 
-![LEDs](../_images/ARGB2_fanandled.jpg)
+<p align="center">
+	<img src="../_images/ARGB2_fanandled.jpg" alt="LEDs" width="90%"/>
+</p>
 
 I logged the communication on the dataline between controller and LEDs and also between individual LEDs. Then I recreated the derived control sequences on an AVR controller for verification. Some features had to be identified by fuzzing (e.g. LED configuration settings.). No software reverse engineering was involved.
 
@@ -88,7 +94,9 @@ The configuration mode allows to write information to a configuration register w
 
 The oscilloscope image below shows a series of pulses of different length being sent to a chain of LEDs. Pulses between 15µs and 25µs are forwarded within the LED chain and are re-timed to 20µs. _dout1_ corresponds to the output of the first LED in the chain, _dout12_ to the output of the 12th LED.
 
-![Startpulse](../_images/GEN2_startpulse.png)
+<p align="center">
+	<img src="../_images/GEN2_startpulse.png" alt="Startpulse" width="70%"/>
+</p>
 
 After sending the start pulse the LEDs are in "configuration" mode. The controller waits for ~300µs and then sends a series of 24 bit words in the WS2812 protocol to the LEDs. Instead of interpreting these as RGB values, they are stored in a 24bit internal configuration register. After the the configuration data has been sent, the LEDs will automatically turn to "normal" mode after the next reset.
 
@@ -96,8 +104,9 @@ After sending the start pulse the LEDs are in "configuration" mode. The controll
 
 Based on fuzzing, the following interpretation of the 24 bit configuration word has been derived:
 
-![configword](../_images/GEN2_configword.png)
-
+<p align="center">
+	<img src="../_images/GEN2_configword.png" alt="configword" width="70%"/>
+</p>
 
 Each LED in a string can be configured individually. The function of the bits is as follows:
 
@@ -149,7 +158,9 @@ This function is used to identify the number of LEDs in a string and also allows
 
 An oscilloscope screenshot of the readout timing is shown below.
 
-'![Readout](../_images/GEN2_readoutmode.png)
+<p align="center">
+	<img src="../_images/GEN2_readoutmode.png" alt="Readout" width="70%"/>
+</p>
 
 The readout mode is initiated by the following sequence:
 1. 20µs "Hi"
@@ -200,7 +211,7 @@ uint8_t ARGB2_readoutstring(void) {
 The Y-cable mode is the most curious and most complex extension. It allows controlling multiple LED strings in parallel using a single wire. The controller can address individual strings and control them independently.
 
 <p align="center">
-    <img src="../_images/GEN2_Ycablemode.png">
+    <img src="../_images/GEN2_Ycablemode.png" width="50%">
 </p>
 
 In this mode, the first LED in each string (red border) takes over a special role as a gateway controller that decides whether data is accepted to the string or not. 
@@ -213,7 +224,9 @@ Subsequently, a special command can be used to activate one or all of the substr
 
 Yet another control sequence is used to send commands to the substrings. One example is shown in the oscilloscope image below:
 
-![Substring commands](../_images/GEN2_gateway_command.png)
+<p align="center">
+	<img src="../_images/GEN2_gateway_command.png" alt="Substring commands" width="70%"/>
+</p>
 
 Each substring command consists of the following sequence:
 
@@ -254,7 +267,9 @@ The first phase of the initialization is to assign addresses to each substring. 
 
 When an uninitialized substring receives the command 0x11, it will wait for a random time between 10 µs and 60 µs, test whether the input is still low. If the input is still low, it means that no other substring has claimed address 0x01. It will then pull high Din, and store the address 0x01 internally. 
 
-![Substring initialization](../_images/GEN2_initializestring.png)
+<p align='center'>
+<img src="../_images/GEN2_initializestring.png" alt="Substring initialization" width="70%"/>
+</p>
 
 The oscilloscope image above shows the timing of the sequence with several measurements stacked to indicate the randomness of the response. Note that the string does not react to the second command because it already had an address assigned (It will also not respond to other address assignment commands). Also note, that the commands are not forwarded to the second device in the string. Only the "gateway device" takes part in the address assignment procedure.
 
