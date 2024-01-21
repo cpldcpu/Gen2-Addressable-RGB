@@ -287,9 +287,10 @@ One question remains: How do we identify each substring after we assigned addres
 This can be done with the following sequence
 
 1. Send configuration word 0x002000 to all LEDs in the substring to activate ID readout.
-2. Use the readout mode to read the ID bits from each LED and count the number of LEDs
+2. Use the readout mode to read the LED-ID bits from each LED and count the number of LEDs
+3. Concatenate the LED-ID bits of all LEDs to get the Substring-ID.
 
-It appears that the ID bits are assigned randomly at manufacture time to the LEDs. The length of the ID depends on the number of LED used in each device. In case of the fan I investigated, 12 LEDs are used. Therefore the ID is 12 bits long, allowing for 4096 unique combinations. 
+It appears that the LED-ID bits are assigned randomly at manufacture time to the LEDs. The length of the substring-ID depends on the number of LED used in each device. In case of the fan I investigated, 12 LEDs are used. Therefore the substringID is 12 bits long, allowing for 4096 unique combinations. 
 
 This does not appear to be a very large number and there is a residual probability (0.00024) that, for example, two RGB fans with the same ID are installed in the same system. In that case, the substring assignment may switch randomly between the two fans whenever the system is powered on. Either this is deemed an acceptable risk, or I have overlooked additional mechanisms.
 
