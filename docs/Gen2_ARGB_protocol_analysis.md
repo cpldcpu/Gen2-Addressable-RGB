@@ -6,9 +6,6 @@ Official Repository: [https://github.com/cpldcpu/Gen2-Addressable-RGB](https://g
 
 ### Table of Contents
 
-
-- [Gen2 Addressable RGB - Protocol Analysis](#gen2-addressable-rgb---protocol-analysis)
-		- [Table of Contents](#table-of-contents)
 - [Introduction](#introduction)
 	- [The companies behind Gen2 ARGB](#the-companies-behind-gen2-argb)
 	- [Investigated Hardware](#investigated-hardware)
@@ -20,10 +17,7 @@ Official Repository: [https://github.com/cpldcpu/Gen2-Addressable-RGB](https://g
 	- [Bidirectional mode / Readout mode](#bidirectional-mode--readout-mode)
 	- [Multi-Layer Mode / Y-Cable Mode](#multi-layer-mode--y-cable-mode)
 		- [Substring control commands](#substring-control-commands)
-			- [Command Details](#command-details)
 		- [Substring initialization and identification](#substring-initialization-and-identification)
-			- [Arbitration procedure](#arbitration-procedure)
-			- [Substring identification](#substring-identification)
 - [Summary and Conclusions](#summary-and-conclusions)
 
 # Introduction
