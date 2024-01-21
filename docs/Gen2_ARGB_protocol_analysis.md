@@ -252,6 +252,37 @@ The following table provides an overview of the commands used in Y-Cable mode. T
 
 In these commands, X represents the address of the sub-string. 1-F are 15 possible substrings, 0 seems to be a broadcast address that addresses all substrings at the same time regardless of their address.
 
+```c
+void ARGB2_sendcommand(uint8_t cmd) {
+	
+		uint8_t out1=PORTB|1;
+		uint8_t out0=PORTB&~1;
+	
+		PORTB=out1;
+		_delay_us(40);
+		PORTB=out0;
+		_delay_us(12);
+
+		command[0]=cmd;
+		ws2812_sendarray(command,1);
+}
+
+uint8_t ARGB2_receivecommandresponse(void) {
+
+		uint8_t out1=PORTB|1;
+		uint8_t out0=PORTB&~1;
+		uint8_t outon =DDRB|1;
+		uint8_t outoff=DDRB&~1;
+
+		DDRB=outoff;
+		PORTB=out0;
+		_delay_us(300);  // implement code to read pulse here
+		DDRB=outon;
+		
+		return 0;	
+}
+```
+
 ### Substring initialization and identification
 
 Initially all substrings are in an uninitialized state and receive exactly the same data from the MCU at their input. How can we control them individually and, even more curious, how can they be identified?
@@ -261,11 +292,11 @@ Initially all substrings are in an uninitialized state and receive exactly the s
 The first phase of the initialization is to assign addresses to each substring. A special arbitration procedure is used for that with the following sequence.
 
 1. Send command 0x20 to reset the addresses of all substrings.
-2. Send command 0x11 to assign address one to one substring. 
+2. Send command 0x11 to assign address 0x01 to one substring. 
 3. After sending the command, pull the dataoutput low and put in it Hi-Z state.
 4. Wait if a high pulse is received from a substring, confirming the address assignment.
 
-When an uninitialized substring receives the command 0x11, it will wait for a random time between 10 µs and 60 µs, test whether the input is still low. If the input is still low, it means that no other substring has claimed address 0x01. It will then pull high Din, and store the address 0x01 internally. 
+When an uninitialized substring receives the command 0x11, it will wait for a random time between 10 µs and 60 µs, test whether the input is still low. If the input is still low, it means that no other substring has claimed address 0x01. It will then pull high Din for 60µs, and store the address 0x01 internally. 
 
 <p align='center'>
 <img src="../_images/GEN2_initializestring.png" alt="Substring initialization" width="70%"/>
@@ -273,12 +304,15 @@ When an uninitialized substring receives the command 0x11, it will wait for a ra
 
 The oscilloscope image above shows the timing of the sequence with several measurements stacked to indicate the randomness of the response. Note that the string does not react to the second command because it already had an address assigned (It will also not respond to other address assignment commands). Also note, that the commands are not forwarded to the second device in the string. Only the "gateway device" takes part in the address assignment procedure.
 
-The successful address assignment can be verified with the ping command 0x31. The string will respond with a high pulse if it has been initialized with 0x11 before. 
+The successful address assignment can be verified with the ping command 0x31. The string will respond with a 60µs long high pulse if it has been initialized with 0x11 before. 
 
 5. Send command 0x31 to verify assignment of address 0x01.
 6. Send command 0x41 to activate the string with address 0x01.
+7. Commence with identification (see below)
 
 After this sequence has been completed and the string was activated, we can send or receive data from the substring with the designed address 0x01.
+
+This procedure has to be repeated with increasing address numbers until each substring in the system has been assigned a unique address.
 
 #### Substring identification
 
@@ -300,7 +334,9 @@ The Gen2 ARGB protocol represents a notable improvement over the vanilla WS2812 
 
 However, the Gen2 ARGB  extensions to the WS2812 protocol are also quite purpose defined and do not offer hooks for additional features. For example, adding more configuration options would require an additional protocol extension.
 
-It seems that Gen2 ARGB  does not yet have caught on outside of products for enthusiast PC builders. The availability of the SK6112 LEDs provides access to at least some of the features in discrete LEDs.
+It seems that Gen2 ARGB  does not yet have caught on outside of products for enthusiast PC builders. However, the availability of the SK6112 LEDs provides access to at least some of the features in discrete LEDs. 
+ 
+In combination with the proprietary nature of this protocol, it seems uncertain if Gen2 ARGB will become a widely adopted standard outside of its niche. 
 
 I hope this protocol analysis is useful. Be aware that it is not based on official documentation. Use the information provided here at your own risk.
 
