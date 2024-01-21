@@ -110,7 +110,7 @@ Based on fuzzing, the following interpretation of the 24 bit configuration word 
 
 Each LED in a string can be configured individually. The function of the bits is as follows:
 
-**PWM Frequency**: These two bits allow selecting the PWM frequency in accordance to the table above. Higher frequency cause less flicker, but may lead to more EMI and a higher error in brightness.
+**PWM Frequency**: These two bits allow selecting the PWM frequency in accordance to the table below. Higher frequency cause less flicker, but may lead to more EMI and a higher error in brightness.
 
 <p align="center">
     <img src="../_images/GEN2_pwmconfig.png" alt="pwmconfig">
