@@ -10,3 +10,6 @@ This repository contains information about an analysis of the Gen2 Addressable R
 
 [./LICENSE](./LICENSE) - Repository license
 
+## Discussions
+
+[Github Discussions](https://github.com/cpldcpu/Gen2-Addressable-RGB/discussions) are enabled. Use them for any questions or inputs.
