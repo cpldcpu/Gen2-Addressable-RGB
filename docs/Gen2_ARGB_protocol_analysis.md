@@ -5,12 +5,13 @@ V1.0 - 2024-Jan-21
 Official Repository: [https://github.com/cpldcpu/Gen2-Addressable-RGB](https://github.com/cpldcpu/Gen2-Addressable-RGB)
 
 ### Table of Contents
-- [Gen2 ARGB - Protocol Analysis](#argb-gen2---protocol-analysis)
+
+- [Gen2 Addressable RGB - Protocol Analysis](#gen2-addressable-rgb---protocol-analysis)
 		- [Table of Contents](#table-of-contents)
 - [Introduction](#introduction)
-- [The companies behind Gen2 ARGB ](#the-companies-behind-argb-gen2)
-- [Investigated Hardware](#investigated-hardware)
-- [Gen2 ARGB vs WS2812](#argb-gen2-vs-ws2812)
+	- [The companies behind Gen2 ARGB](#the-companies-behind-gen2-argb)
+	- [Investigated Hardware](#investigated-hardware)
+	- [Gen2 ARGB vs WS2812](#gen2-argb-vs-ws2812)
 - [Description of Operating Modes and Protocol](#description-of-operating-modes-and-protocol)
 	- [Standard WS2812 mode](#standard-ws2812-mode)
 	- [Configuration Mode](#configuration-mode)
@@ -18,10 +19,7 @@ Official Repository: [https://github.com/cpldcpu/Gen2-Addressable-RGB](https://g
 	- [Bidirectional mode / Readout mode](#bidirectional-mode--readout-mode)
 	- [Multi-Layer Mode / Y-Cable Mode](#multi-layer-mode--y-cable-mode)
 		- [Substring control commands](#substring-control-commands)
-			- [Command Details](#command-details)
 		- [Substring initialization and identification](#substring-initialization-and-identification)
-			- [Arbitration procedure](#arbitration-procedure)
-			- [Substring identification](#substring-identification)
 - [Summary and Conclusions](#summary-and-conclusions)
 
 # Introduction
@@ -38,7 +36,7 @@ Reason enough to take a closer look. This article summarizes my research on Gen2
 
 I will not go through all the steps I went through to analyze the protocol and discover information, as this was quite a nonlinear process spread out over the last 2 years. Instead, a condensed summary of the findings is presented below.
 
-# The companies behind Gen2 ARGB 
+## The companies behind Gen2 ARGB 
 
 The company promoting Gen2 ARGB  the most seems to be Coolermaster. Their technology promotion page is [here](https://landing.coolermaster.com/pages/addressable-gen-2-rgb-led-controller/). They sell controllers for Gen2 ARGB  LED strings and accessories, such as RGB lit coolers and light strips that can be attached to the controllers. 
 
@@ -46,7 +44,7 @@ It appears that the technology itself originated at two small IC design houses: 
 
 In case you looked at the links above and were confused about how ARGB2 Gen2 is different from the WS2812 - well, I was too.  
 
-# Investigated Hardware
+## Investigated Hardware
 
 Since I was not able to locate any discrete Gen2 ARGB  LEDs, let alone find data-sheets. I purchased a LED controller ([Coolermaster A1](https://www.coolermaster.com/catalog/coolers/rgb-accessories/led-controller-a1/)) and a fan with Gen2 ARGB LEDs ([Artic P12 PWM PST-ARGB](https://www.arctic.de/en/P12-PWM-PST-A-RGB/ACFAN00231A)). 
 
@@ -64,7 +62,7 @@ I logged the communication on the dataline between controller and LEDs and also 
 
 In the meantime, LCSC has also started selling an LED called [SK6112-RG](https://www.lcsc.com/product-detail/Light-Emitting-Diodes-LED_OPSCO-Optoelectronics-SK6112-RG_C5440833.html) which seems to be based on the AP6112 controller. This does not support the Y-cable mode, but the other GEN2 extension.
 
-# Gen2 ARGB vs WS2812 
+## Gen2 ARGB vs WS2812 
 
 ARGB2 GEN2 is an extension of the WS2812 protocol and fully compatible to it. If an ARGB2 GEN2 led is driven by a WS2812 controller, it will behave like a WS2812. However, there are some additional features, as shown below.
 
