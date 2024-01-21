@@ -271,8 +271,8 @@ One question remains: How do we identify each substring after we assigned addres
 
 This can be done with the following sequence
 
-1. Send configuration word 0x002000 to all LEDs in the substring to active ID readout.
-2. Use the readout mode to read all ID bits.
+1. Send configuration word 0x002000 to all LEDs in the substring to activate ID readout.
+2. Use the readout mode to read the ID bits from each LED and count the number of LEDs
 
 It appears that the ID bits are assigned randomly at manufacture time to the LEDs. The length of the ID depends on the number of LED used in each device. In case of the fan I investigated, 12 LEDs are used. Therefore the ID is 12 bits long, allowing for 4096 unique combinations. 
 
