@@ -1,6 +1,6 @@
 # Gen2-Addressable-RGB
 
-This repository contains information about an analysis of the Gen2 Addressable RGB protocol.
+This repository contains information about an analysis of the Gen2 Addressable RGB protocol that is used to control RGB-Illumination in personal computers.
 
 ## Repository Contents
 
