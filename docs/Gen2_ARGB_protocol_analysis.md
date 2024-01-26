@@ -154,7 +154,7 @@ void ARGB2_sendconfig(uint8_t *configword,uint8_t numberofleds) {
 
 This mode allows reading information from the LEDs. The protocol is rather limited and only one or 1.5 bits can be transferred, which are encoded by the length of a pulse.
 
-This function is used to identify the number of LEDs in a string and also allows reading a unique ID of individual strings in a Y-cable configuration but reading out the ID bit of each LEDs and concatenating them.
+This function is used to identify the number of LEDs in a string and also allows reading a unique ID of individual strings in a Y-cable configuration by reading out the ID bit of each LEDs and concatenating them.
 
 An oscilloscope screenshot of the readout timing is shown below.
 
