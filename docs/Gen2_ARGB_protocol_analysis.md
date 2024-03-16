@@ -1,6 +1,7 @@
 # Gen2 Addressable RGB - Protocol Analysis
 
-V1.0 - 2024-Jan-21 
+  V1.0 - 2024-Jan-21 - *original document* <br>
+  V1.1 - 2024-Mar-16 - *Added reference section, added material from @cnn123666*
 
 Official Repository: [https://github.com/cpldcpu/Gen2-Addressable-RGB](https://github.com/cpldcpu/Gen2-Addressable-RGB)
 
@@ -341,3 +342,12 @@ In combination with the proprietary nature of this protocol, it seems uncertain 
 I hope this protocol analysis is useful. Be aware that it is not based on official documentation. Use the information provided here at your own risk.
 
 If you have additional remarks, please let me know (or even submit a pull request to this article). Of course, it would also be great if more official documentation became available.
+
+# References
+
+Information about ARGB2 Gen2 available on the web.
+
+- **SK6112 datasheet:** https://github.com/cnn123666/gen2
+- **SK6112 product page at LCSC:** https://www.lcsc.com/product-detail/Light-Emitting-Diodes-LED_OPSCO-Optoelectronics_SK6112-RG_C5440833.html
+- **Chinese blog article describing a driver for the protocol:** https://blog.csdn.net/weixin_47445513/article/details/128558170
+- **Anapex product page for AP611x drivers:** http://www.anapex.com.tw/en/product_4
