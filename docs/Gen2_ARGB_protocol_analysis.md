@@ -1,7 +1,8 @@
 # Gen2 Addressable RGB - Protocol Analysis
 
   V1.0 - 2024-Jan-21 - *original document* <br>
-  V1.1 - 2024-Mar-16 - *Added reference section, added material from @cnn123666*
+  V1.1 - 2024-Mar-16 - *Added reference section, added material from @cnn123666* <br>
+  V1.2 - 2025-Oct-15 - *Updated link to SK6112-RG datasheet which became available in May 2024, two months after the original document was published. Corrected information about it using the AP6112Y. Thanks @Merikei*
 
 Official Repository: [https://github.com/cpldcpu/Gen2-Addressable-RGB](https://github.com/cpldcpu/Gen2-Addressable-RGB)
 
@@ -65,7 +66,7 @@ The fan contains a small PCB with 12 LEDS in 3528 form factor. These LEDs appear
 
 I logged the communication on the dataline between controller and LEDs and also between individual LEDs. Then I recreated the derived control sequences on an AVR controller for verification. Some features had to be identified by fuzzing (e.g. LED configuration settings.). No software reverse engineering was involved.
 
-In the meantime, LCSC has also started selling an LED called [SK6112-RG](https://www.lcsc.com/product-detail/Light-Emitting-Diodes-LED_OPSCO-Optoelectronics-SK6112-RG_C5440833.html) which seems to be based on the AP6112 controller. This does not support the Y-cable mode, but the other GEN2 extension.
+In the meantime, LCSC has also started selling an LED called [SK6112-RG](https://www.lcsc.com/product-detail/Light-Emitting-Diodes-LED_OPSCO-Optoelectronics-SK6112-RG_C5440833.html) which seems to be based on the AP6112Y controller. 
 
 ## Gen2 ARGB vs WS2812 
 
@@ -347,7 +348,7 @@ If you have additional remarks, please let me know (or even submit a pull reques
 
 Information about ARGB2 Gen2 available on the web.
 
-- **SK6112 datasheet:** https://github.com/cnn123666/gen2
+- **SK6112 datasheet:** https://www.lcsc.com/datasheet/C5440833.pdf
 - **SK6112 product page at LCSC:** https://www.lcsc.com/product-detail/Light-Emitting-Diodes-LED_OPSCO-Optoelectronics_SK6112-RG_C5440833.html
 - **Chinese blog article describing a driver for the protocol:** https://blog.csdn.net/weixin_47445513/article/details/128558170
 - **Anapex product page for AP611x drivers:** http://www.anapex.com.tw/en/product_4
